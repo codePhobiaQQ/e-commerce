@@ -1,7 +1,7 @@
 /shop_back_v1/
-/cp-react/
+#/cp-react/
 /HTML/
-/shop_back/*
+#/shop_back/*
 
 .DS_Store
 .idea
