@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  shop_proxy:
+    image: nginx:alpine
+    depends_on:
+      - shop_back
+    ports:
+     - "6080:6080"
+    volumes:
+     - ./docker-resources/nginx:/etc/nginx/conf.d
+     - ./shop_back/app:/app/code
+
+  shop_back:
+    image: webdevops/php:7.4-alpine
+    depends_on:
+      - shop_db
+    volumes:
+     - ./shop_back/app:/app/code
+
+  shop_db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
